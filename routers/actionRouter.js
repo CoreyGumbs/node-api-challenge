@@ -38,5 +38,19 @@ router.post('/:project_id/action', validateActionPost, validateProjectId,  (req,
     });
 });
 
+//UPDATE ACTION
+router.put('/:project_id/action/:action_id', validateActionPost, validateProjectId, validateActionId, (req, res) => {
+    const {id} = req.action;
+
+    action_db.update(id, req.body)
+    .then(action => {
+        res.status(201).json(action);
+    })
+    .catch(error => {
+        res.status(500).json({error: "There was an issue updating the action."});
+    });
+    
+});
+
 
 module.exports = router;

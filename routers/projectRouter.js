@@ -39,6 +39,23 @@ router.get('/:project_id', validateProjectId, (req, res) => {
     });
 });
 
+//GET ALL PROJECT ACTIONS
+router.get('/:project_id/actions', validateProjectId, (req, res) => {
+    const {id} = req.project;
+
+    project_db.getProjectActions(id)
+    .then(actions => {
+        if(actions.length === 0){
+            res.status(400).json({message: "There are no actions associated with this project. Please add some."});
+        }else{
+            res.status(200).json({project_actions: actions});
+        }
+    })
+    .catch(error => {
+        res.status(500).json({error: "There was an error retrieving this project's actions"});
+    })
+});
+
 //POST NEW PROJECT
 router.post('/', validateProjectPost, (req, res) => {
     

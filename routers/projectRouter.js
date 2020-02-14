@@ -38,7 +38,7 @@ router.get('/:id', validateProjectId, (req, res) => {
     });
 });
 
-//POST PROJECT METHOD
+//POST NEW PROJECT
 router.post('/', validateProjectPost, (req, res) => {
     
     project_db.insert(req.body)
@@ -50,7 +50,7 @@ router.post('/', validateProjectPost, (req, res) => {
     });
 });
 
-//PUT/UPDATE METHODS
+//PUT/UPDATE CURRENT PROJECT
 router.put('/:id', validateProjectPost, validateProjectId, (req, res) =>{
     const {id} = req.project;
     const {body} = req;
@@ -65,5 +65,16 @@ router.put('/:id', validateProjectPost, validateProjectId, (req, res) =>{
 
 });
 
-//DELETE METHODS
+//DELETE PROJECT
+router.delete('/:id', validateProjectId, (req, res) => {
+    const {id} = req.project;
+    project_db.remove(id)
+    .then(project => {
+        res.status(201).json({deleted_project: project});
+    })
+    .catch(error => {
+        res.status(500).json({error: "There was a problem deleting the project."});
+    });
+});
+
 module.exports = router;

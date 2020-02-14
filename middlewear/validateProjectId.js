@@ -5,7 +5,11 @@ function validateProjectId(req, res, next){
     project_db.get(req.params.id)
     .then(project => {
         if(req.params.id != project.id){
-            res.status(400).json({message: "Invalid Project ID. "});
+            res.status(400).json({message: "Invalid Project ID."});
+            next();
+        }else if(project === null){
+            res.status(400).json({message: "Invalid Project ID."});
+            next();
         }else{
             req.project = project
             next();

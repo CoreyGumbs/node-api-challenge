@@ -8,7 +8,7 @@ const validateActionId = require('../middlewear/validateActionId');
 const router = express.Router();
 
 //GET ACTIONS
-router.get('/actions/:action_id', validateActionId, (req, res) => {
+router.get(':project_id/action/:action_id', validateProjectId, validateActionId, (req, res) => {
     const {id} = req.action;
     action_db.get(id)
     .then(action =>{
@@ -52,5 +52,17 @@ router.put('/:project_id/action/:action_id', validateActionPost, validateProject
     
 });
 
+//DELETE ACTION
+router.delete('/:project_id/action/:action_id', validateProjectId, validateActionId, (req, res) => {
+    const { id } = req.action;
+
+    action_db.remove(id)
+    .then(action => {
+        res.status(201).json({deleted_action: action});
+    })
+    .catch(error => {
+        res.status(500).json({error: "There was a problem deleting the action."});
+    });
+})
 
 module.exports = router;

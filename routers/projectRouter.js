@@ -48,7 +48,7 @@ router.get('/:project_id/actions', validateProjectId, (req, res) => {
         if(actions.length === 0){
             res.status(400).json({message: "There are no actions associated with this project. Please add some."});
         }else{
-            res.status(200).json({project_actions: actions});
+            res.status(200).json(actions);
         }
     })
     .catch(error => {
@@ -61,7 +61,7 @@ router.post('/', validateProjectPost, (req, res) => {
     
     project_db.insert(req.body)
     .then(project => {
-        res.status(201).json({created: project});
+        res.status(201).json(project);
     })
     .catch(error => {
         res.status(500).json({error: "There was an error creating the project."});
@@ -75,7 +75,7 @@ router.put('/:project_id', validateProjectPost, validateProjectUpdateId, (req, r
 
     project_db.update(id, body)
     .then(project => {
-        res.status(201).json({update: project});
+        res.status(201).json(project);
     })
     .catch(error => {
         res.status(500).json({error: "There was a problem updating the project."});

@@ -11,7 +11,7 @@ server.use(express.json());
 server.use(logger);
 
 //routers
-server.use('/api/projects/', projectRouter, actionRouter );
+server.use('/api/projects', projectRouter, actionRouter);
 
 
 server.get('/', (req,res) => {

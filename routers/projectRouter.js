@@ -2,6 +2,7 @@ const express = require('express');
 const project_db = require('../data/helpers/projectModel');
 const validateProjectId = require('../middlewear/validateProjectId');
 const validateProjectPost = require('../middlewear/validateProjectPost');
+const validateProjectUpdateId = require('../middlewear/validateProjectUpdateId');
 
 
 const router = express.Router();
@@ -22,7 +23,7 @@ router.get('/', (req, res) => {
 });
 
 //GET PROJECT BY ID
-router.get('/:id', validateProjectId, (req, res) => {
+router.get('/:project_id', validateProjectId, (req, res) => {
     const { id } = req.project;
 
     project_db.get(id)
@@ -51,7 +52,7 @@ router.post('/', validateProjectPost, (req, res) => {
 });
 
 //PUT/UPDATE CURRENT PROJECT
-router.put('/:id', validateProjectPost, validateProjectId, (req, res) =>{
+router.put('/:project_id', validateProjectPost, validateProjectUpdateId, (req, res) =>{
     const {id} = req.project;
     const {body} = req;
 
@@ -66,7 +67,7 @@ router.put('/:id', validateProjectPost, validateProjectId, (req, res) =>{
 });
 
 //DELETE PROJECT
-router.delete('/:id', validateProjectId, (req, res) => {
+router.delete('/:project_id', validateProjectId, (req, res) => {
     const {id} = req.project;
     project_db.remove(id)
     .then(project => {

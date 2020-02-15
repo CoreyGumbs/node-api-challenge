@@ -40,13 +40,19 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+    We learned about express'  req/res methods, routing and middlewear
+
 - [ ] Describe Middleware?
+    middlewear is small code/software that assist in providing modular services to code. They typically do one thing such as code validation, or convert types, or address security issues, etc.
 
 - [ ] Describe a Resource?
+    a resource is an endpoint or object that has data or methods attached to it. It is used to communicate/transfer data with other endpoints
 
 - [ ] What can the API return to help clients know if a request was successful?
+typically an api will return an HTTP Status Code or a status code with a message telling the client what happened. It can also return a json object with a number of properties, and js objects depending on what the request was asking for. 
 
 - [ ] How can we partition our application into sub-applications?
+we can partition our application into sub-applications by designing apis down into routes or seperate sections depending on data relations etc.
 
 ## Minimum Viable Product
 
